@@ -7,7 +7,11 @@ categories = {
     "Videos": [".mp4", ".mov", ".webm"],
 }
 
+#Testing the script without actually moving files
+DRY_RUN = False
 
+if DRY_RUN:
+    print("DRY RUN!")
 
 for file in path.iterdir():
 
@@ -21,7 +25,8 @@ for file in path.iterdir():
                 break
 
         path_category = path / found_category
-        path_category.mkdir(exist_ok=True)
+        if not DRY_RUN:
+            path_category.mkdir(exist_ok=True)
 
         destination = path_category / file.name
         i = 1
@@ -30,6 +35,9 @@ for file in path.iterdir():
             destination = path_category / new_name
             i += 1
 
-        file.rename(destination)
-        print(f"Moved {destination.name} -> {found_category}")
+        if DRY_RUN:
+            print(f"Would have moved {destination.name} -> {found_category}")
+        else:
+            file.rename(destination)
+            print(f"Moved {destination.name} -> {found_category}")
 
