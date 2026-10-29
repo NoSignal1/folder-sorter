@@ -8,10 +8,12 @@ categories = {
 }
 
 
+
 for file in path.iterdir():
 
     if file.is_file():
         found_category = "Other"
+
 
         for category, extensions in categories.items():
             if file.suffix.lower() in extensions:
@@ -19,4 +21,6 @@ for file in path.iterdir():
                 break
 
         print(f"{file.name} -> {found_category}")
+        path_category = path / found_category
+        path_category.mkdir(exist_ok=True)
 
