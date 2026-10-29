@@ -20,7 +20,8 @@ for file in path.iterdir():
                 found_category = category
                 break
 
-        print(f"{file.name} -> {found_category}")
+        print(f"Moving {file.name} -> {found_category}")
         path_category = path / found_category
         path_category.mkdir(exist_ok=True)
+        file.rename(path_category / file.name)
 
