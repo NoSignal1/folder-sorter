@@ -1,2 +1,5 @@
-x = 5 
-print(x + 2)
+from pathlib import Path
+path = Path("test_downloads")
+
+for file in path.iterdir():
+    print(file.name)
