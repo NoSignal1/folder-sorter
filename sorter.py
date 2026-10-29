@@ -8,7 +8,7 @@ categories = {
 }
 
 #Testing the script without actually moving files
-DRY_RUN = False
+DRY_RUN = True
 
 if DRY_RUN:
     print("DRY RUN!")
