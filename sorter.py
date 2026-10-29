@@ -20,8 +20,16 @@ for file in path.iterdir():
                 found_category = category
                 break
 
-        print(f"Moving {file.name} -> {found_category}")
         path_category = path / found_category
         path_category.mkdir(exist_ok=True)
-        file.rename(path_category / file.name)
+
+        destination = path_category / file.name
+        i = 1
+        while destination.exists():
+            new_name = f"{file.stem} ({i}){file.suffix}"
+            destination = path_category / new_name
+            i += 1
+
+        file.rename(destination)
+        print(f"Moved {destination.name} -> {found_category}")
 
