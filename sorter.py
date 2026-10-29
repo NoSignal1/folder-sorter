@@ -1,6 +1,22 @@
 from pathlib import Path
 path = Path("test_downloads")
 
+categories = {
+    "Images" : [".jpg", ".png", ".gif"],
+    "Documents": [".pdf", ".docx", ".txt"],
+    "Videos": [".mp4", ".mov", ".webm"],
+}
+
+
 for file in path.iterdir():
+
     if file.is_file():
-        print(f"{file.name} -> {file.suffix}")
+        found_category = "Other"
+
+        for category, extensions in categories.items():
+            if file.suffix.lower() in extensions:
+                found_category = category
+                break
+
+        print(f"{file.name} -> {found_category}")
+
